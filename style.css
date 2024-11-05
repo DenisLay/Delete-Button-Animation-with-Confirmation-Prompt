@@ -20,6 +20,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    perspective: 1000px;
 }
 
 .btn {
@@ -27,11 +28,22 @@ body {
     width: 200px;
     height: 80px;
     text-align: center;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transition: width 0.8s cubic-bezier(0.23, 1, 0.320, 1),
+                height 0.8s cubic-bezier(0.23, 1, 0.320, 1),
+                transform 0.8s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .btn-open {
     width: 400px;
     height: 160px;
+    transform: rotateX(180deg);
+}
+
+.btn-open .front {
+    pointer-events: none;
+    line-height: 160px;
 }
 
 /* front side */
@@ -45,7 +57,9 @@ body {
     color: #fff;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: background 0.15s ease;
+    /*transition: background 0.15s ease;*/
+    backface-visibility: hidden;
+    transition: background 0.15s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
 .front:hover {
@@ -62,4 +76,43 @@ body {
     background-color: #eee;
     color: #222;
     overflow: hidden;
+    transform: translateZ(-2px) rotateX(180deg);
+}
+
+.back-open {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.back p {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.back button {
+    padding: 12px 20px;
+    width: 30%;
+    margin: 0 5px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.15s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+
+.back .btn_yes {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+.back .btn_yes:hover {
+    background-color: var(--light-blue);
+}
+
+.back .btn_no {
+    color: var(--blue);
+}
+
+.back .btn_no:hover {
+    background-color: #ddd;
 }
